@@ -2,29 +2,44 @@
 #include<string>
 #include<math.h>
 using namespace std;
-
-//数组中无重复元素
-
-int test01(int a[],int length,int x)
+string CutString(string);
+//外观数列
+//假定初始数字是3
+void test01(string &s,int n)
 {
-	for(int i=0;i<length;i++)
+	if(n==1)
 	{
-		if(x<a[i])
-		{
-			return i;
-		}
-		else if(x==a[i])
-		{
-			return i;
-		}
+		cout << s;
 	}
-	return length;
+	if(n>1)
+	{
+		s = CutString(s);
+		test01(s, n - 1);
+	}
 }
 
+string CutString(string s)
+{
+	string newS = "";
+	int counter = 1;
+	for (int i = 0; i < s.length(); i++)
+	{
+		
+		if(s[i]!=s[i+1])
+		{
+			newS = newS+ to_string(counter) + s[i];
+			counter = 1;
+		}
+		else
+		{
+			counter++;
+		}
+	}
+	return newS;
+}
 
 int main()
 {
-	int a[4] = { 1,3,5,6 };
-	cout << test01(a, 4, 7);
-
+	string str = "3";
+	test01(str, 5);
 }
